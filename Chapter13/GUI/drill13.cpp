@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include <stdlib.h>
+
 using namespace Graph_lib;
 
 int main()
@@ -48,8 +50,20 @@ try
 	win.attach(pic2);
 	win.attach(pic3);
 
-	// 100x100-as kép, amely mozgatható lesz
+	// 100x100-as kép, amely random fog ugrálni
 
+	for (int i = 1; i <= 9; ++i) {
+		int px = rand() % 8;
+		int py = rand() % 8;
+		Image pic100up {Point{px*100, py*100}, "100x100.jpg"};
+		win.attach(pic100up);
+		win.wait_for_button();
+
+	}
+
+	// az alsó kommentelt megoldás egy szabály szerint mozgatja a képeket
+
+	/*
 	for (int i = 1; i <= 7; ++i) {
 		Image pic100down {Point{(i*100)-100, i*100}, "100x100.jpg"};
 		Image pic100up {Point{i*100, (i*100)-100}, "100x100.jpg"};
@@ -58,6 +72,7 @@ try
 		win.wait_for_button();
 
 	}
+	*/
 
 	win.wait_for_button();
 
