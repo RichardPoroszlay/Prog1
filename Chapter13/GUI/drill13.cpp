@@ -52,6 +52,8 @@ try
 
 	// 100x100-as kép, amely random fog ugrálni
 
+	srand((unsigned)time(0)); // ténylegesen randomként fog ugrálni a kép!
+
 	for (int i = 1; i <= 9; ++i) {
 		int px = rand() % 8;
 		int py = rand() % 8;

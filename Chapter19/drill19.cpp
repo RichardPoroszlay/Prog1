@@ -1,3 +1,30 @@
+/*	
+	1. Define template<typename T> struct S { T val; }; .
+	
+	2. Add a constructor, so that you can initialize with a T .
+	
+	3. Define variables of types S<int> , S<char> , S<double> , S<string> , and
+S<vector<int>> ; initialize them with values of your choice.
+	
+	4. Read those values and print them.
+	5. Add a function template get() that returns a reference to val .
+	6. Put the definition of get() outside the class.
+	7. Make val private.
+	8. Do 4 again using get() .
+	9. Add a set() function template so that you can change val .
+	10. Replace set() with an S<T>::operator=(const T&) . Hint: Much simpler
+than §19.2.5.
+	11. Provide const and non- const versions of get() .
+	12. Define a function template<typename T> read_val(T& v) that reads from
+cin into v .
+	
+	13. Use read_val() to read into each of the variables from 3 except the
+S<vector<int>> variable.
+	14. Bonus: Define input and output operators ( >> and << ) for vector<T> s.
+For both input and output use a { val, val, val } format. That will allow
+read_val() to also handle the S<vector<int>> variable.
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,25 +36,28 @@
 
 using namespace std;
 
+// Feladat #1 
+
 template<typename T>
 struct S {
 
-		S (T vv = 0)  : val{vv} {}
-		T& get();
-		void set(T new_t) {val = new_t;}
-		void operator=(const T& s);
-		const T& get() const;
+		S (T vv = 0)  : val{vv} {}			// Feladat #2
+		T& get();							// Feladat #5
+		void set(T new_t) {val = new_t;}	// Feladat #9
+		void operator=(const T& s);			// Feladat #10
+		const T& get() const;				// Feladat #11
 
-	private:
+	private:	// Feladat #7
 		T val;
 };
 
-
+// Feladat #5 & Feladat #6
 template<typename T>
 T& S<T>::get() {
 	return val;
 }
 
+// Feladat #11
 template<typename T>
 const T& S<T>::get() const{
 	return val;
@@ -38,12 +68,13 @@ void S<T>::operator=(const T& s) {
 	val = s;
 } 
 
-// template függvényt hozunk létre
+// Feladat #12
 template<typename T>
 void read_val(T& v) {
 	cin >> v;
 }
 
+// Feladat #14
 template<typename T>
 std::ostream& operator<<(ostream& os, vector<T>& v) {
 	os << "{ ";
@@ -74,6 +105,8 @@ istream& operator>>(istream& is, vector<T>& v) {
 
 int main() {
 
+	// Feladat #3
+
 	// constructorral inicializáljuk az alaptagokat
 	S<int> s;	// S típusú, amelyhez integer érték tartozik!!
 	S<int> si {37};
@@ -81,6 +114,8 @@ int main() {
 	S<double> sd {3.2};
 	S<string> ss {"Hello"};
 	S<vector<int>> svi {std::vector<int> {1, 1, 2, 3, 5, 8}};
+
+	// Feladat #4 & Feladat #8
 
 	cout << "S<int> : " << s.get() << '\n'
 		 << "S<int> : " << si.get() << '\n'
@@ -94,21 +129,30 @@ int main() {
 	}
 	cout << '\n';
 
+	// Feladat #8
+
 	sc.set('s');
 	cout << "S<char> : " << sc.get() << '\n';
+
+	// Feladat #10
 
 	sd = 42.1;
   	cout << "S<double> : " << sd.get() << '\n'; 
  
+  	// Feladat #13
+
   	int ii;
+  	cout << "Enter an integer value!\n";
   	read_val(ii);
   	S<int> si2 {ii};
  
   	double dd;
+  	cout << "Enter a double value!\n";
   	read_val(dd);
   	S<double> sd2 {dd};
  
   	string ss2;
+  	cout << "Enter a string value!\n";
   	read_val(ss2);
   	S<string> str {ss2};
  
@@ -116,8 +160,9 @@ int main() {
   	cout << "S<double> : " << sd2.get() << '\n';
   	cout << "S<string> : " << str.get() << '\n';
  
+  	// Feladat #14
+
   	cout << "Add a vector in this format: {val, val, val}: ";
-  	
   	vector<int> vint;
   	read_val(vint);
   	S<vector<int>> svi2 {vint};
