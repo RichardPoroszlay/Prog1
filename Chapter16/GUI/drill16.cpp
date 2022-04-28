@@ -49,6 +49,7 @@ private:
 	void quit();
 
 	// az alábbiak a callback függvények
+	// callback function az egy olyan function, amely egy argumentum egy másik function-ben. (lásd: alább)
 	static void cb_red(Address,Address);
     static void cb_blue(Address,Address);
     static void cb_black(Address,Address);
