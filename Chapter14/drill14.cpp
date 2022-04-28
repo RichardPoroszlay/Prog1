@@ -35,6 +35,10 @@ D21 and a D22 .
 //Az is absztrakt osztály, amely egy absztrakt osztályból öröklődik
 //A virtual kulcsszó azt hivatott jelezni, hogy a függvény felül lesz írva
 
+/* A virtual function is a special type of function that, when called, resolves to the most-derived version of the function that 
+	exists between the base and derived class. 
+This capability is known as polymorphism.
+*/
 using namespace std;
 
 // Feladat #1
